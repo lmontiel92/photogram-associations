@@ -57,6 +57,8 @@ class User < ApplicationRecord
 
   # User#commented_photos: returns rows from the photos table associated to this user through its comments
 
+  has_many(:commented_photos, through: :comments, source: :photo)
+
 
   ### Indirect associations built on scoped associations
 
@@ -106,21 +108,21 @@ class User < ApplicationRecord
     #return matching_photos
   #end
 
-  def commented_photos
-    my_comments = self.comments
+  #def commented_photos
+    #my_comments = self.comments
     
-    array_of_photo_ids = Array.new
+    #array_of_photo_ids = Array.new
 
-    my_comments.each do |a_comment|
-      array_of_photo_ids.push(a_comment.photo_id)
-    end
+    #my_comments.each do |a_comment|
+      #array_of_photo_ids.push(a_comment.photo_id)
+    #end
 
-    matching_photos = Photo.where({ :id => array_of_photo_ids })
+    #matching_photos = Photo.where({ :id => array_of_photo_ids })
 
-    unique_matching_photos = matching_photos.distinct
+    #unique_matching_photos = matching_photos.distinct
 
-    return unique_matching_photos
-  end
+    #return unique_matching_photos
+  #end
 
   #def sent_follow_requests
     #my_id = self.id
